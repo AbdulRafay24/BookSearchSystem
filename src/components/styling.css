@@ -1,0 +1,28 @@
+.SearchBar {
+  width: 50%;
+}
+.SearchButton {
+  border-radius: 10px;
+  margin: 10px;
+  background-color: white;
+}
+.SearchButton:hover {
+  opacity: 0.7;
+}
+.myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ddd;
+  margin-top: -1px;
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block;
+}
+
+.myUL li a:hover:not(.header) {
+  background-color: #eee;
+}
