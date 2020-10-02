@@ -1,14 +1,11 @@
-import React from "react";
+import React from 'react';
 // import { ListGroup } from "react-bootstrap";
-import "./styling.css";
+import './styling.css';
 
 const searchDropDown = (props) => {
-  // console.log(props.booksData[0]);
-  let pp = JSON.parse(JSON.stringify(props.booksD));
-  console.log(pp);
-  for (let i = 0; i < props.booksD.length; i++) {
-    // console.log(JSON.parse(JSON.stringify(props.booksD[i])));
-  }
+  console.log(props.booksData);
+
+  // let pp = JSON.parse(JSON.stringify(props.booksD));
 
   // let arr = props.booksD;
   // console.log(arr);
@@ -33,7 +30,13 @@ const searchDropDown = (props) => {
 
   return (
     <div>
-      <h4>{props.booksData}</h4>
+      <ul>
+        {props.booksData !== 'Loading...'
+          ? props.booksData.map((item) => {
+              return <li>{item}</li>;
+            })
+          : ''}
+      </ul>
     </div>
   );
 };
