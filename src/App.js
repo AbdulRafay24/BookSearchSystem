@@ -11,8 +11,7 @@ var convert = require("xml-js"); //Library to convert Xml to json
 const App = () => {
   let XMLData = "";
   const [finalData, setFinalData] = useState("");
-  const [searchItem, setSearchItem] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -30,6 +29,12 @@ const App = () => {
 
   // Implemented Async Await to fetch XML data
 
+  var obj = {
+    id: "",
+    title: "",
+    author: "",
+    url: "",
+  };
   const fetchData = async () => {
     const response = await fetch(
       "https://www.goodreads.com/search/index.xml?key=q9976AVfCI34Fp0mJUqyVQ&q=Ender%27s+Game"
@@ -67,19 +72,128 @@ const App = () => {
                   // console.log(test);
                   test.map((item, index) => {
                     if (index === 3) {
-                      const titleArray = Object.entries(item[1][1]);
+                      const titleArray = Object.entries(item[1]);
                       // console.log(titleArray);
                       titleArray.map((item, index) => {
-                        if (index === 2) {
-                          const lastArray = item[1];
-                          // console.log(lastArray);
-                          lastArray.map((item) => {
-                            //Pushing data to array
-                            JSONdata.push(item.text);
-                            // console.log(JSONdata);
-                          });
-                        }
+                        // console.log(item);
+
+                        const idArray = item[1];
+                        console.log(idArray);
+                        // if (index === 0) {
+                        // const idArray = item[1].elements[0].text;
+                        // console.log(idArray);
+                        // obj.id = idArray;
+
+                        // JSONdata.push(idArray);
+                        // }
+                        // if (index === 1) {
+                        // const tArray = item[1].elements[0].text;
+                        // console.log(tArray);
+                        // obj.title = tArray;
+                        // JSONdata.push(tArray);
+                        // }
+                        // if (index === 2) {
+                        // const authorArray =
+                        // item[1].elements[1].elements[0].text;
+                        // console.log(authorArray);
+                        // obj.author = authorArray;
+                        // JSONdata.push(authorArray);
+                        // }
+                        // if (index === 3) {
+                        // const urlArray = item[1].elements[0].text;
+                        // console.log(urlArray);
+                        // obj.url = urlArray;
+                        // JSONdata.push(urlArray);
+                        // }
+                        // console.log(obj);
+                        // JSONdata.push(obj);
                       });
+                      // titleArray.forEach((id, title, author, iUrl, siUrl) => {
+                      //   console.log(id);
+                      // });
+
+                      // titleArray.forEach((element) => {
+                      //   console.log(element);
+
+                      // JSONdata.push(x);
+                      // console.log(JSONdata);
+                      // });
+                      // titleArray.map((item, index) => {
+                      //   if (index === 2) {
+                      // console.log(item);
+                      // const lastArray = item[1].elements;
+                      // console.log(lastArray);
+
+                      // lastArray.map((item) => {
+                      // const dataArray = Object.entries(item);
+                      // console.log(dataArray);
+                      // dataArray.map((item) => {
+                      // console.log(item);
+                      // if (item[0] == "text") {
+                      //   const thisArray = item[1];
+                      // console.log(thisArray);
+                      // Object.entries(item[1]).forEach(
+                      //   (id, title, author, iUrl, siUrl) => {
+                      //     console.log(id);
+                      //   }
+                      // );
+                      // console.log(dataArray[1]);
+                      // const thisArray = item[1];
+                      // console.log(thisArray);
+                      // console.log(thisArray);
+                      // Object.entries(thisArray).forEach(
+                      //   (id, title, author, iUrl, siUrl) => {
+                      //     console.log(id);
+                      //   }
+                      // );
+                      // }
+                      // });
+                      // console.log(dataArray);
+                      // if (dataArray[0] == "text") {
+                      //   console.log(dataArray[1]);
+                      // const thisArray = item[1];
+                      // console.log(thisArray);
+
+                      //     dataArray.forEach((element) => {
+                      //       var x = element;
+                      //       // console.log(x);
+                      // if (x[0] == "text") {
+                      //   console.log(x[1])
+                      // console.log(x);
+                      // JSONdata.push(x);
+                      // console.log(JSONdata);
+                      // }
+                      // });
+
+                      // if (dataArray[1] == "text") {
+                      //   console.log(dataArray[1][1]);
+                      // }
+                      // dataArray.map((item) => {
+                      // console.log(item);
+                      // s
+                      // console.log(item);
+                      // if (item[0] == "text") {
+                      //   const thisArray = item[1];
+                      // console.log(thisArray);
+                      // thisArray.forEach((element) => {
+                      //   var x = element;
+                      //   console.log(x);
+                      // });
+                      // console.log(thisArray);
+                      // console.log(thisArray);
+                      // JSONdata.push(thisArray);
+                      // console.log(JSONdata);
+                      // }
+                      // });
+                      // });
+                      // lastArray.map((item) => {
+                      //       //Pushing data to array
+                      // console.log(item.text);
+                      // JSONdata.push(item.text);
+                      // console.log(JSONdata);
+                      // });
+                      // }
+                      // });
                     }
                   });
                 });
@@ -89,44 +203,23 @@ const App = () => {
         });
         // finally calling function and setting FinalJSON data value of JSONdata array
         // fetchingData(JSONdata);
+        // console.log(JSONdata);
         fetchingData(JSONdata);
       }
     });
   };
-  // console.log(finalData);
-  const keyPressHandler = (e) => {
-    // console.log(e.key);
-    setSearchItem(e.target.value);
-    console.log(searchItem);
-  };
-  const buttonClickedHandler = (obj) => {
-    // let index = finalData(obj);
-    // console.log(index);
-    console.log("Button Clicked");
-  };
-  const bookClickedHandler = (item) => {
-    let a = finalData[item];
-  };
-
-  // console.log("Book Clicked");
-  // console.log(finalData);
-
-  // console.log(finalData);
 
   return (
     <div className="App">
       <header className="App-header">
-        <SearchBar
-          bookData={finalData}
-          // placeholder="Enter Movie Name"
-          // keyPressed={keyPressHandler}
-        ></SearchBar>
-        <SearchButton buttonClicked={buttonClickedHandler}></SearchButton>
-        <SDD
+        <SearchBar bookData={finalData}></SearchBar>
+
+        {/* <SearchButton buttonClicked={buttonClickedHandler}></SearchButton> */}
+        {/* <SDD
           value={searchItem}
           booksData={finalData ? finalData : "Loading..."}
           onClick={bookClickedHandler}
-        ></SDD>
+        ></SDD> */}
         {/* <BrowserRouter>
           <Route
             path="/"

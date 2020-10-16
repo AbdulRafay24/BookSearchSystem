@@ -3,10 +3,6 @@ import React from "react";
 import "./styling.css";
 
 const searchDropDown = (props) => {
-  // console.log(props.booksData);
-  // let bb = props.booksData;
-  // console.log(bb);
-
   return (
     <>
       <ul>
