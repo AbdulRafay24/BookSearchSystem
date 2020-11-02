@@ -1,28 +1,63 @@
-.SearchBar {
-  width: 50%;
+.backgroundDetails {
+  background-color: rgb(24, 2, 2);
+  margin: 20px;
+  margin-left: 40%;
+  width: 100%;
 }
-.SearchButton {
+.main {
+  margin-top: 40px;
+  align-self: center;
+  overflow-y: visible;
+  width: 40%;
+}
+.container {
+  box-sizing: border-box;
+  flex: 0 0 30%;
+  height: 370px;
+  margin: 0.5em;
+  overflow: auto;
+}
+.SearchBar {
+  width: 100%;
+  margin-top: 20px;
+  height: 50px;
+  padding: 10px;
+  font-size: 25px;
+}
+
+.myUl {
+  width: 100%;
+  /* border: 1px solid white; */
+  background-color: #f6f6f6;
+  color: black;
+  list-style-type: none;
+  font-size: 25px;
+  margin-top: -1px;
+}
+a.myLi {
+  color: black;
+  background-color: lightgray;
+}
+a.myLi:hover {
+  color: gray;
+  text-decoration: none !important;
+}
+
+h1 {
+  color: white;
+}
+.HomeButton {
   border-radius: 10px;
   margin: 10px;
   background-color: white;
 }
-.SearchButton:hover {
+.HomeButton:hover {
   opacity: 0.7;
-}
-.myUL {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid #ddd;
-  margin-top: -1px;
-  background-color: #f6f6f6;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px;
-  color: black;
-  display: block;
+  cursor: pointer;
 }
 
-.myUL li a:hover:not(.header) {
-  background-color: #eee;
+.HeadingStyle {
+  font-size: large;
+  color: white;
+  overflow-wrap: break-word;
 }

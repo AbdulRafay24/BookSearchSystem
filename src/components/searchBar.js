@@ -3,43 +3,47 @@ import "./styling.css";
 import BookDetails from "./../page/details";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
+/**
+ *
+ * @param {*} props Movies Array
+ */
+
 const SearchBar = (props) => {
-  let bookTitle = props.bookData;
-  // console.log(bookTitle);
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const [searchResults, setSearchResults] = React.useState([]);
-  // const [title, settitle] = useState([item]);
+  const moviesArray = Object.entries(props.moviesData);
+  let titlesArray = []; // initialized an empty array in which titles are pushed
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
   const handleChange = (event) => {
-    setSearchTerm(event.target.value);
+    setSearchTerm(event.target.value); // setting search term as user search different movies
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
+    moviesArray.map((item) => {
+      const title = item[1].title; //To fetch all movie titles
+      titlesArray.push(title); // Pushing titles in titlesArray
+    });
+  });
+
+  useEffect(() => {
     if (searchTerm) {
-      const results = Object.values(props.bookData).filter((person) =>
+      const results = titlesArray.filter((person) =>
         person.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      ); // to filter the titles
+
       setSearchResults(results);
     } else {
       setSearchResults("");
     }
   }, [searchTerm]);
+
   const resetInputField = () => {
     setSearchTerm("");
   };
-  const buttonClickedHandler = (obj) => {
-    // let index = finalData(obj);
-    // console.log(index);
-    console.log("Button Clicked");
-  };
-  const bookTitleHandler = () => {};
-  const bookClickedHandler = (item) => {
-    console.log(item);
-    // settitle(item);
-    resetInputField();
-  };
-  // console.log(title);
+
   return (
-    <div className="App">
+    <div className="main">
       <BrowserRouter>
         <Route
           path="/"
@@ -47,77 +51,40 @@ const SearchBar = (props) => {
           render={() => {
             return (
               <>
+                <h1>Movie Search System</h1>
                 <input
+                  className="SearchBar"
                   type="text"
-                  placeholder="Search Book"
-                  value={searchTerm}
+                  placeholder="Search Movie"
+                  value={searchTerm} // Movie Searching for
                   onChange={handleChange}
                 />
-                <button className="SearchButton" onClick={buttonClickedHandler}>
-                  Search
-                </button>
-                <Link
-                  className="App-link"
-                  to={{
-                    pathname: "/details",
-                    aboutProps: { bookTitle },
-                  }}
-                >
-                  <ul>
+                <div className="container">
+                  <ul className="myUl">
                     {Object.values(searchResults).map((item, index) => (
-                      <li
+                      <Link
+                        className="myLi"
                         key={`${index}${item}`}
-                        onClick={() => bookClickedHandler(item)}
-                        // onClick={() => props.onClick(index, item)}
-                      >{`${index + 1}. ${item}`}</li>
+                        to={{
+                          pathname: "/details",
+                          allDataProps: { moviesArray }, // Sending all Movies Data as Props
+                          titleProp: { item }, // Sending the particular movie which was clicked
+                        }}
+                      >
+                        <li
+                          key={`${index}${item}`}
+                          onClick={() => resetInputField()}
+                        >{`${index + 1}. ${item}`}</li>
+                      </Link>
                     ))}
                   </ul>
-                </Link>
+                </div>
               </>
             );
           }}
         ></Route>
-        <Route
-          path="/details/"
-          exact
-          component={BookDetails}
-          // render={() => {
-          //   return <Link to="/">Home</Link>;
-          // }}
-        ></Route>
+        <Route path="/details" exact component={BookDetails}></Route>
       </BrowserRouter>
-      {/* <Route
-        path="/"
-        exact
-        render={() => {
-          return (
-            <Link
-              className="App-link"
-              to={{
-                pathname: "/details",
-                aboutProps: { name: { finalData } },
-              }}
-            >
-              <SDD
-                value={searchItem}
-                booksData={finalData ? finalData : "Loading..."}
-                onClick={bookClickedHandler}
-              ></SDD>
-            </Link>
-            // <Link to="/details" className="App-link">
-
-            // </Link>
-          );
-        }}
-      ></Route>
-      <Route
-        path="/details/"
-        exact
-        component={BD}
-        // render={() => {
-        //   return <Link to="/">Home</Link>;
-        // }}
-      ></Route> */}
     </div>
   );
 };
